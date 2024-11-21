@@ -1,13 +1,107 @@
-﻿<Window x:Class="Automate.Views.SerreWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Automate.Views"
-        mc:Ignorable="d"
-        Title="SerreWindow" Height="450" Width="800">
-    <Grid>
-        <TextBox HorizontalAlignment="Left" Height="3" Margin="334,166,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="6" />
+﻿<Window
+    x:Class="Automate.Views.SerreWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Automate.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d"
+    Title="SerreWindow">
+    <Window.Resources>
+        <Style x:Key="SwitchStyle" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid Width="45" Height="22">
+                            <Border
+                                x:Name="Background"
+                                Background="Gray"
+                                CornerRadius="15" />
+                            <Ellipse
+                                x:Name="Switch"
+                                Width="15"
+                                Height="15"
+                                Margin="2"
+                                HorizontalAlignment="Left"
+                                Fill="White" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Background" Property="Background" Value="blue" />
+                                <Setter TargetName="Switch" Property="HorizontalAlignment" Value="Right" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
+    <Grid>
+        <StackPanel
+            Margin="10,94,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Orientation="Vertical">
+            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" />
+            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" />
+            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" />
+            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" />
+            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" />
+        </StackPanel>
+        <TextBlock
+            Width="56"
+            Height="17"
+            Margin="75,101,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap">
+            <Run Language="fr-ca" Text="Fenêtres" />
+        </TextBlock>
+        <TextBlock
+            Width="70"
+            Height="17"
+            Margin="75,134,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap">
+            <Run Language="fr-ca" Text="Chauffages" />
+        </TextBlock>
+        <TextBlock
+            Width="70"
+            Height="17"
+            Margin="75,166,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap">
+            <Run Language="fr-ca" Text="Ventilateurs" />
+        </TextBlock>
+        <TextBlock
+            Width="56"
+            Height="17"
+            Margin="75,199,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap">
+            <Run Language="fr-ca" Text="Arroseurs" />
+        </TextBlock>
+        <TextBlock
+            Width="56"
+            Height="17"
+            Margin="75,231,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap">
+            <Run Language="fr-ca" Text="Lumières" />
+        </TextBlock>
+        <Image
+            Source="/Resources/greenHouse.png" 
+            Width="511"
+            Height="301"
+            Margin="231,61,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"/>
     </Grid>
 </Window>
