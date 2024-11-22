@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Automate.Utils.LocalServices;
+using Automate.Utils;
+using Automate.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +20,12 @@ namespace Automate.Views
     /// <summary>
     /// Logique d'interaction pour SerreWindow.xaml
     /// </summary>
-    public partial class SerreWindow : Window
+    public partial class GreenHouseWindow : Window
     {
-        public SerreWindow()
+        public GreenHouseWindow()
         {
             InitializeComponent();
+            DataContext = new GreenHouseViewModel(this);
         }
     }
 }
