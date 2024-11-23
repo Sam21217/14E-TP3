@@ -29,7 +29,7 @@ namespace Automate.ViewModels
         }
         public void GotoSerreView()
         {
-            _navigationService.OpenNewView<SerreWindow>();
+            _navigationService.OpenNewView<GreenHouseWindow>();
             _navigationService.CloseCurrentView(_window);
         }
     }
