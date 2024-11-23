@@ -1,6 +1,10 @@
-﻿using Automate.Utils.LocalServices;
+﻿using Automate.Interfaces;
+using Automate.Models;
+using Automate.Utils.LocalServices;
 using Automate.Views;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace Automate.ViewModels
@@ -17,7 +21,6 @@ namespace Automate.ViewModels
         {
             GoToCalendarCommand = new RelayCommand(GotoCalendarView);
             GoToSerreCommand = new RelayCommand(GotoSerreView);
-
             _navigationService = navigationService;
             _window = openedWindow;
         }
