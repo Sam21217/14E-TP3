@@ -11,15 +11,10 @@ namespace Automate.Utils.DataServices
     {
         private const string DATA_FILE_PATH = "TempData.csv";
 
-        public List<OutsideConditions> Conditions = new List<OutsideConditions>();
-
-        public WeatherConditionsService()
+        public List<Weather> GetWeathers()
         {
-            AddDataToConditions(new StreamReader(DATA_FILE_PATH));
-        }
-
-        private void AddDataToConditions(StreamReader file)
-        {
+            List<Weather> Conditions = new List<Weather>();
+            StreamReader file = new StreamReader(DATA_FILE_PATH);
             string[] fileContent = file.ReadToEnd().Replace('\r', ' ').Split('\n');
             fileContent = fileContent.Skip(1).ToArray();
             foreach (string line in fileContent)
@@ -27,15 +22,16 @@ namespace Automate.Utils.DataServices
                 string[] lineContent = line.Split(',');
                 Conditions.Add(CreateOutsideConditions(lineContent));
             }
+            return Conditions;
         }
 
-        private OutsideConditions CreateOutsideConditions(string[] lineContent)
+        private Weather CreateOutsideConditions(string[] lineContent)
         {
             DateTime dateTime = Convert.ToDateTime(lineContent[0]);
             int temp = int.Parse(lineContent[1]);
             int humidity = int.Parse(lineContent[2]);
             int lighting = int.Parse(lineContent[3]);
-            return new OutsideConditions(dateTime, temp, humidity, lighting);
+            return new Weather(dateTime, temp, humidity, lighting);
         }
     }
 }
