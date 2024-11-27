@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Automate.Utils.LocalServices
 {
-    public class WeatherTips
+    public static class WeatherTips
     {
 
         const int MAX_TEMP = 27;
@@ -21,7 +21,7 @@ namespace Automate.Utils.LocalServices
         const int MAX_LUX = 45000;
         const int MIN_LUX = 25000;
 
-        public string GetTempTips(int temperature, bool heatingIsOn, bool windowsAreOpen)
+        public static string GetTempTips(int temperature, bool heatingIsOn, bool windowsAreOpen)
         {
             if (temperature > MAX_TEMP)
             {
@@ -48,7 +48,7 @@ namespace Automate.Utils.LocalServices
             return "OK";
         }
 
-        public string GetHumidityTips(int humidity, bool ventilationIsOn, bool sprinklersAreOn)
+        public static string GetHumidityTips(int humidity, bool ventilationIsOn, bool sprinklersAreOn)
         {
             if (humidity > MAX_HUMIDITY)
             {
@@ -75,14 +75,26 @@ namespace Automate.Utils.LocalServices
             return "OK";
         }
 
-        public string CheckLighting(int lighting, bool lightsAreOn)
+        public static string GetLightingTips(int lighting, int time, bool lightsAreOn)
         {
             if (lighting > MAX_LUX && lightsAreOn)
                 return "ÉTEINDRE LUMIÈRES";
-            if (lighting < MIN_LUX && !lightsAreOn)
+
+            if (IsNight(time) && lightsAreOn)
+                return "ÉTEINDRE LUMIÈRES";
+
+            if (lighting < MIN_LUX && !lightsAreOn && !IsNight(time))
                 return "ALLUMER LUMIÈRES";
 
             return "OK"; 
+        }
+
+        static private bool IsNight(int time)
+        {
+            if (time > 20 || time < 6)
+                return true;
+
+            return false;
         }
     }
 }

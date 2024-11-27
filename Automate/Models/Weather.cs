@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Automate.Models
 {
-    public class OutsideConditions
+    public class Weather
     {
         public DateTime DateTime { get; set; }
 
@@ -16,7 +16,7 @@ namespace Automate.Models
 
         public int Lighting { get; set; }
 
-        public OutsideConditions(DateTime dateTime, int temperature, int humidity, int lighting)
+        public Weather(DateTime dateTime, int temperature, int humidity, int lighting)
         {
             DateTime = dateTime;
             Temperature = temperature;
