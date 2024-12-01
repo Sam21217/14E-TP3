@@ -4,9 +4,6 @@
 name: .NET
 
 on:
-  schedule:
-    - cron: "* * * * *"
-
   push: 
     branches: [ "main" ]
 
