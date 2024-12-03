@@ -6,4 +6,4 @@ Compte admin --> Username : george | Password : werwer
 Compte normal --> Username : steve | Password : werwer 
 
 
-![example workflow](https://github.com/Sam21217/Automate/actions/workflows/dotnet.yml/badge.svg?branch=main&event=push)
+![example workflow](https://github.com/Sam21217/14E-TP3/actions/workflows/dotnet.yml/badge.svg?branch=main&event=push)
