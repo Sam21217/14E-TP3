@@ -45,11 +45,11 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Orientation="Vertical">
-            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" />
-            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" />
-            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" />
-            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" />
-            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" />
+            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" IsChecked="{Binding IsWindowOpen}"/>
+            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" IsChecked="{Binding IsHeaterActivated}"/>
+            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" IsChecked="{Binding IsFanActivated}" />
+            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" IsChecked="{Binding IsSprinklerActivated}"/>
+            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" IsChecked="{Binding IsLightOpen}"/>
         </StackPanel>
         <TextBlock
             Width="56"

@@ -9,8 +9,6 @@
     <Grid>
         <Rectangle HorizontalAlignment="Center" Height="68" Fill="Gray" Stroke="Black" VerticalAlignment="Top" Width="800"/>
         <Button Content="Calendrier" Height="34" Margin="556,17,0,0" VerticalAlignment="Top" Width="155" Command="{Binding GoToCalendarCommand}"/>
-        <Button Content="Serre" Height="34" Margin="0,17,0,0" VerticalAlignment="Top" Width="156" Command="{Binding GoToSerreCommand}" HorizontalAlignment="Center"/>
-        <Button Content="Conseils" Height="34" Margin="87,17,0,0" VerticalAlignment="Top" Width="155" Command="{Binding GoToSerreCommand}"/>
-
+        <Button Content="Serre" Height="34" Margin="0,17,0,0" VerticalAlignment="Top" Width="156" Command="{Binding GoToGreenHouseCommand}" HorizontalAlignment="Center"/>
     </Grid>
 </Window>
