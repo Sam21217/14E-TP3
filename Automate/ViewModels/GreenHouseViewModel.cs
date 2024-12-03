@@ -8,19 +8,27 @@ using System.Windows;
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Automate.Views;
+using System.Windows.Navigation;
 
 namespace Automate.ViewModels
 {
     public class GreenHouseViewModel : INotifyPropertyChanged
     {
+        private readonly NavigationUtils _navigationService;
+
         private Window _window;
-        public ICommand AddTaskCommand { get; }
-        public ICommand UpdateTaskCommand { get; }
-        public ICommand DeleteTaskCommand { get; }
+        public ICommand GotoHomeViewCommand { get; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public GreenHouseViewModel(Window openedWindow) => _window = openedWindow;
+        public GreenHouseViewModel(Window openedWindow, NavigationUtils navigationService)
+        {
+            _window = openedWindow;
+            GotoHomeViewCommand = new RelayCommand(GoToHomeView);
+            _navigationService = navigationService;
+        }
+
 
         public bool IsWindowOpen
         {
@@ -70,6 +78,12 @@ namespace Automate.ViewModels
                 GreenHouse.isLightOpen = value;
                 NotifyOnPropertyChanged(nameof(IsLightOpen));
             }
+        }
+
+        public void GoToHomeView()
+        {
+            _navigationService.OpenNewView<HomeWindow>();
+            _navigationService.CloseCurrentView(_window);
         }
 
         protected void NotifyOnPropertyChanged([CallerMemberName] string? propertyName = null)

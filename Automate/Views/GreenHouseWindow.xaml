@@ -103,5 +103,6 @@
             Margin="231,61,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"/>
+        <Button Content="Retour à l'accueil" Margin="10,10,0,0" VerticalAlignment="Top" Command="{Binding GotoHomeViewCommand}"/>
     </Grid>
 </Window>
