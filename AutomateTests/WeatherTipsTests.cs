@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Automate.Utils.LocalServices;
+﻿using Automate.Utils.LocalServices;
 
 namespace AutomateTests
 {
@@ -24,7 +19,7 @@ namespace AutomateTests
         [Test]
         public void GetTempTips_TempOver_HeatingIsOn_WindowsAreOpen()
         {
-            const string EXPECTED_MESSAGE = "DÉSACTIVER CHAUFFAGE";
+            const string EXPECTED_MESSAGE = "DÉSACTIVER CHAUFFAGE CAR TEMPÉRATURE TROP HAUTE";
 
             string message = WeatherTips.GetTempTips(TEMP_OVER_MAX, true, true);
 
@@ -34,7 +29,7 @@ namespace AutomateTests
         [Test]
         public void GetTempTips_TempOver_HeatingIsNotOn_WindowsAreNotOpen()
         {
-            const string EXPECTED_MESSAGE = "OUVRIR FENÊTRES";
+            const string EXPECTED_MESSAGE = "OUVRIR FENÊTRES CAR TEMPÉRATURE TROP HAUTE";
 
             string message = WeatherTips.GetTempTips(TEMP_OVER_MAX, false, false);
 
@@ -44,7 +39,7 @@ namespace AutomateTests
         [Test]
         public void GetTempTips_TempOver_HeatingIsOn_WindowsAreNotOpen()
         {
-            const string EXPECTED_MESSAGE = "DÉSACTIVER CHAUFFAGE et OUVRIR FENÊTRES";
+            const string EXPECTED_MESSAGE = "DÉSACTIVER CHAUFFAGE ET OUVRIR FENÊTRES CAR TEMPÉRATURE TROP HAUTE";
 
             string message = WeatherTips.GetTempTips(TEMP_OVER_MAX, true, false);
 
@@ -54,7 +49,7 @@ namespace AutomateTests
         [Test]
         public void GetTempTips_TempUnder_HeatingIsNotOn_WindowsAreNotOpen()
         {
-            const string EXPECTED_MESSAGE = "ACTIVER CHAUFFAGE";
+            const string EXPECTED_MESSAGE = "ACTIVER CHAUFFAGE CAR TEMPÉRATURE TROP BASSE";
 
             string message = WeatherTips.GetTempTips(TEMP_UNDER_MIN, false, false);
 
@@ -64,7 +59,7 @@ namespace AutomateTests
         [Test]
         public void GetTempTips_TempUnder_HeatingIsOn_WindowsAreOpen()
         {
-            const string EXPECTED_MESSAGE = "FERMER FENÊTRES";
+            const string EXPECTED_MESSAGE = "FERMER FENÊTRES CAR TEMPÉRATURE TROP BASSE";
 
             string message = WeatherTips.GetTempTips(TEMP_UNDER_MIN, true, true);
 
@@ -74,7 +69,7 @@ namespace AutomateTests
         [Test]
         public void GetTempTips_TempUnder_HeatingIsNotOn_WindowsAreOpen()
         {
-            const string EXPECTED_MESSAGE = "ACTIVER CHAUFFAGE et FERMER FENÊTRES";
+            const string EXPECTED_MESSAGE = "ACTIVER CHAUFFAGE ET FERMER FENÊTRES CAR TEMPÉRATURE TROP BASSE";
 
             string message = WeatherTips.GetTempTips(TEMP_UNDER_MIN, false, true);
 
@@ -94,7 +89,7 @@ namespace AutomateTests
         [Test]
         public void GetHumidityTips_HumidityOver_VentilationIsNotOn_SprinklersAreNotOn()
         {
-            const string EXPECTED_MESSAGE = "ACTIVER VENTILATION";
+            const string EXPECTED_MESSAGE = "ACTIVER VENTILATION CAR HUMIDITÉ TROP HAUTE";
 
             string message = WeatherTips.GetHumidityTips(HUMIDITY_OVER_MAX, false, false);
 
@@ -104,7 +99,7 @@ namespace AutomateTests
         [Test]
         public void GetHumidityTips_HumidityOver_VentilationIsOn_SprinklersAreOn()
         {
-            const string EXPECTED_MESSAGE = "DÉSACTIVER ARROSEURS";
+            const string EXPECTED_MESSAGE = "DÉSACTIVER ARROSEURS CAR HUMIDITÉ TROP HAUTE";
 
             string message = WeatherTips.GetHumidityTips(HUMIDITY_OVER_MAX, true, true);
 
@@ -114,7 +109,7 @@ namespace AutomateTests
         [Test]
         public void GetHumidityTips_HumidityOver_VentilationIsNotOn_SprinklersAreOn()
         {
-            const string EXPECTED_MESSAGE = "ACTIVER VENTILATION et DÉSACTIVER ARROSEURS";
+            const string EXPECTED_MESSAGE = "ACTIVER VENTILATION ET DÉSACTIVER ARROSEURS CAR HUMIDITÉ TROP HAUTE";
 
             string message = WeatherTips.GetHumidityTips(HUMIDITY_OVER_MAX, false, true);
 
@@ -124,7 +119,7 @@ namespace AutomateTests
         [Test]
         public void GetHumidityTips_HumidityUnder_VentilationIsOn_SprinklersAreOn()
         {
-            const string EXPECTED_MESSAGE = "DÉSACTIVER VENTILATION";
+            const string EXPECTED_MESSAGE = "DÉSACTIVER VENTILATION CAR HUMIDITÉ TROP BASSE";
 
             string message = WeatherTips.GetHumidityTips(HUMIDITY_UNDER_MIN, true, true);
 
@@ -134,7 +129,7 @@ namespace AutomateTests
         [Test]
         public void GetHumidityTips_HumidityUnder_VentilationIsNotOn_SprinklersAreNotOn()
         {
-            const string EXPECTED_MESSAGE = "ACTIVER ARROSEURS";
+            const string EXPECTED_MESSAGE = "ACTIVER ARROSEURS CAR HUMIDITÉ TROP BASSE";
 
             string message = WeatherTips.GetHumidityTips(HUMIDITY_UNDER_MIN, false, false);
 
@@ -144,7 +139,7 @@ namespace AutomateTests
         [Test]
         public void GetHumidityTips_HumidityUnder_VentilationIsOn_SprinklersAreNotOn()
         {
-            const string EXPECTED_MESSAGE = "DÉSACTIVER VENTILATION et ACTIVER ARROSEURS";
+            const string EXPECTED_MESSAGE = "DÉSACTIVER VENTILATION ET ACTIVER ARROSEURS CAR HUMIDITÉ TROP BASSE";
 
             string message = WeatherTips.GetHumidityTips(HUMIDITY_UNDER_MIN, true, false);
 
@@ -164,7 +159,7 @@ namespace AutomateTests
         [Test]
         public void GetLightingTips_LightingOver_LightsAreOn()
         {
-            const string EXPECTED_MESSAGE = "ÉTEINDRE LUMIÈRES";
+            const string EXPECTED_MESSAGE = "ÉTEINDRE LUMIÈRES CAR LUMINOSITÉ TROP FORTE";
             const int time = 10;
 
             string message = WeatherTips.GetLightingTips(LUX_OVER_MAX, time, true);
@@ -175,10 +170,21 @@ namespace AutomateTests
         [Test]
         public void GetLightingTips_LightingUnder_AtNoon_LightsAreOff()
         {
-            const string EXPECTED_MESSAGE = "ALLUMER LUMIÈRES";
+            const string EXPECTED_MESSAGE = "ALLUMER LUMIÈRES CAR LUMINOSITÉ TROP BASSE";
             const int time = 11;
 
             string message = WeatherTips.GetLightingTips(LUX_UNDER_MIN, time, false);
+
+            Assert.That(message, Is.EqualTo(EXPECTED_MESSAGE));
+        }
+
+        [Test]
+        public void GetLightingTips_LightingOK_LightsAreOn_AtMidnight()
+        {
+            const string EXPECTED_MESSAGE = "ÉTEINDRE LUMIÈRES CAR C'EST LA NUIT";
+            const int time = 23;
+
+            string message = WeatherTips.GetLightingTips(LUX_OK, time, true);
 
             Assert.That(message, Is.EqualTo(EXPECTED_MESSAGE));
         }
@@ -201,17 +207,6 @@ namespace AutomateTests
             const int time = 11;
 
             string message = WeatherTips.GetLightingTips(LUX_OK, time, false);
-
-            Assert.That(message, Is.EqualTo(EXPECTED_MESSAGE));
-        }
-
-        [Test]
-        public void GetLightingTips_LightingOK_LightsAreOn_AtMidnight()
-        {
-            const string EXPECTED_MESSAGE = "ÉTEINDRE LUMIÈRES";
-            const int time = 23;
-
-            string message = WeatherTips.GetLightingTips(LUX_OK, time, true);
 
             Assert.That(message, Is.EqualTo(EXPECTED_MESSAGE));
         }

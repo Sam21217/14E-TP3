@@ -1,13 +1,4 @@
-﻿using Automate.Models;
-using MongoDB.Driver.Core.WireProtocol.Messages.Encoders.BinaryEncoders;
-using System;
-using System.Collections.Generic;
-using System.DirectoryServices.ActiveDirectory;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Automate.Utils.LocalServices
+﻿namespace Automate.Utils.LocalServices
 {
     public static class WeatherTips
     {
@@ -26,24 +17,24 @@ namespace Automate.Utils.LocalServices
             if (temperature > MAX_TEMP)
             {
                 if (heatingIsOn && windowsAreOpen)
-                    return "DÉSACTIVER CHAUFFAGE";
+                    return "DÉSACTIVER CHAUFFAGE CAR TEMPÉRATURE TROP HAUTE";
 
                 if (!heatingIsOn && !windowsAreOpen)
-                    return "OUVRIR FENÊTRES";
+                    return "OUVRIR FENÊTRES CAR TEMPÉRATURE TROP HAUTE";
 
                 if (heatingIsOn && !windowsAreOpen)
-                    return "DÉSACTIVER CHAUFFAGE et OUVRIR FENÊTRES";
+                    return "DÉSACTIVER CHAUFFAGE ET OUVRIR FENÊTRES CAR TEMPÉRATURE TROP HAUTE";
             }
             if (temperature < MIN_TEMP)
             {
                 if (!heatingIsOn && !windowsAreOpen)
-                    return "ACTIVER CHAUFFAGE";
+                    return "ACTIVER CHAUFFAGE CAR TEMPÉRATURE TROP BASSE";
 
                 if (heatingIsOn && windowsAreOpen)
-                    return "FERMER FENÊTRES";
+                    return "FERMER FENÊTRES CAR TEMPÉRATURE TROP BASSE";
 
                 if (!heatingIsOn && windowsAreOpen)
-                    return "ACTIVER CHAUFFAGE et FERMER FENÊTRES";
+                    return "ACTIVER CHAUFFAGE ET FERMER FENÊTRES CAR TEMPÉRATURE TROP BASSE";
             }
             return "OK";
         }
@@ -53,24 +44,24 @@ namespace Automate.Utils.LocalServices
             if (humidity > MAX_HUMIDITY)
             {
                 if (!ventilationIsOn && !sprinklersAreOn)
-                    return "ACTIVER VENTILATION";
+                    return "ACTIVER VENTILATION CAR HUMIDITÉ TROP HAUTE";
 
                 if (ventilationIsOn && sprinklersAreOn)
-                    return "DÉSACTIVER ARROSEURS";
+                    return "DÉSACTIVER ARROSEURS CAR HUMIDITÉ TROP HAUTE";
 
                 if (!ventilationIsOn && sprinklersAreOn)
-                    return "ACTIVER VENTILATION et DÉSACTIVER ARROSEURS";
+                    return "ACTIVER VENTILATION ET DÉSACTIVER ARROSEURS CAR HUMIDITÉ TROP HAUTE";
             }
             if (humidity < MIN_HUMIDITY)
             {
                 if (ventilationIsOn && sprinklersAreOn)
-                    return "DÉSACTIVER VENTILATION";
+                    return "DÉSACTIVER VENTILATION CAR HUMIDITÉ TROP BASSE";
 
                 if (!ventilationIsOn && !sprinklersAreOn)
-                    return "ACTIVER ARROSEURS";
+                    return "ACTIVER ARROSEURS CAR HUMIDITÉ TROP BASSE";
 
                 if (ventilationIsOn && !sprinklersAreOn)
-                    return "DÉSACTIVER VENTILATION et ACTIVER ARROSEURS";
+                    return "DÉSACTIVER VENTILATION ET ACTIVER ARROSEURS CAR HUMIDITÉ TROP BASSE";
             }
             return "OK";
         }
@@ -78,13 +69,13 @@ namespace Automate.Utils.LocalServices
         public static string GetLightingTips(int lighting, int time, bool lightsAreOn)
         {
             if (lighting > MAX_LUX && lightsAreOn)
-                return "ÉTEINDRE LUMIÈRES";
+                return "ÉTEINDRE LUMIÈRES CAR LUMINOSITÉ TROP FORTE";
 
             if (IsNight(time) && lightsAreOn)
-                return "ÉTEINDRE LUMIÈRES";
+                return "ÉTEINDRE LUMIÈRES CAR C'EST LA NUIT";
 
             if (lighting < MIN_LUX && !lightsAreOn && !IsNight(time))
-                return "ALLUMER LUMIÈRES";
+                return "ALLUMER LUMIÈRES CAR LUMINOSITÉ TROP BASSE";
 
             return "OK"; 
         }
