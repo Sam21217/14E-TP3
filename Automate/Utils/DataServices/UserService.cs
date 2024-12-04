@@ -3,19 +3,17 @@ using MongoDB.Driver;
 using System.Linq;
 using BC = BCrypt.Net.BCrypt;
 using Automate.Interfaces;
+using System.Configuration;
 
 namespace Automate.Utils.DataServices
 {
     public class UserService : IUserService
     {
         private readonly IMongoCollection<User> _users;
-        private readonly MongoDBService _db;
-        private const string COLLECTION_NAME = "Users";
 
-        public UserService(MongoDBService db)
+        public UserService(MongoDBService database)
         {
-            _db = db;
-            _users = _db.GetCollection<User>(COLLECTION_NAME);
+            _users = database.GetCollection<User>(ConfigurationManager.AppSettings["UserCollection"]!);
         }
 
         public User? Authenticate(string? username, string? password)

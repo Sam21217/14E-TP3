@@ -5,19 +5,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Automate.Interfaces;
+using System.Configuration;
 
 namespace Automate.Utils.DataServices
 {
     public class CalendarService : ICalendarService
     {
         private readonly IMongoCollection<AutomateTask> _tasks;
-        private const string COLLECTION_NAME = "Tasks";
-        private readonly MongoDBService database;
 
         public CalendarService(MongoDBService database)
         {
-            this.database = database;
-            _tasks = database.GetCollection<AutomateTask>(COLLECTION_NAME);
+            _tasks = database.GetCollection<AutomateTask>(ConfigurationManager.AppSettings["TaskCollection"]!);
         }
 
         public List<AutomateTask>? GetTasksByDate(DateTime? date)
