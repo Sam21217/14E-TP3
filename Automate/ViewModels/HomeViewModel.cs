@@ -1,10 +1,7 @@
-﻿using Automate.Interfaces;
-using Automate.Models;
+﻿using Automate.Utils;
 using Automate.Utils.LocalServices;
 using Automate.Views;
-using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace Automate.ViewModels
@@ -15,12 +12,14 @@ namespace Automate.ViewModels
         public ICommand GoToCalendarCommand { get; }
         public ICommand GoToSerreCommand { get; }
 
+        public ICommand DisconnectUserCommand { get; }
 
         private Window _window;
         public HomeViewModel(Window openedWindow, NavigationUtils navigationService)
         {
             GoToCalendarCommand = new RelayCommand(GotoCalendarView);
             GoToSerreCommand = new RelayCommand(GotoSerreView);
+            DisconnectUserCommand = new RelayCommand(DisconnectUser);
             _navigationService = navigationService;
             _window = openedWindow;
         }
@@ -33,6 +32,13 @@ namespace Automate.ViewModels
         public void GotoSerreView()
         {
             _navigationService.OpenNewView<GreenHouseWindow>();
+            _navigationService.CloseCurrentView(_window);
+        }
+
+        public void DisconnectUser()
+        {
+            _navigationService.OpenNewView<LoginWindow>();
+            Env.authenticatedUser = null;
             _navigationService.CloseCurrentView(_window);
         }
     }
