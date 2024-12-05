@@ -1,17 +1,15 @@
 ﻿using MongoDB.Driver;
+using System.Configuration;
 
 namespace Automate.Utils.DataServices
 {
     public class MongoDBService
     {
         private readonly IMongoDatabase _database;
-        private const string MONGO_URL = "mongodb://localhost:27017";
-        private const string DB_NAME = "AutomateDB";
-
         public MongoDBService()
         {
-            var client = new MongoClient(MONGO_URL);
-            _database = client.GetDatabase(DB_NAME);
+            var client = new MongoClient(ConfigurationManager.AppSettings["MongoUrl"]!);
+            _database = client.GetDatabase(ConfigurationManager.AppSettings["DBName"]!);
         }
 
         public IMongoCollection<T> GetCollection<T>(string collectionName)
