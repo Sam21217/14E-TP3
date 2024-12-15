@@ -8,7 +8,7 @@ namespace Automate.Utils.DataServices
 {
     public static class WeatherConditionsService
     {
-        private const string DATA_FILE_PATH = "TempData.csv";
+        private const string DATA_FILE_PATH = @"TempData.csv";
 
         public static List<Weather> GetWeathers()
         {

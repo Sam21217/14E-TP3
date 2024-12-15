@@ -40,4 +40,10 @@
     <Resource Include="Resources\window.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TempData.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
