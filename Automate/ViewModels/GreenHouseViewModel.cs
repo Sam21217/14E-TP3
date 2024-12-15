@@ -16,11 +16,12 @@ namespace Automate.ViewModels
     {
         private readonly NavigationUtils _navigationService;
 
-        private string _tempTip;
-        private string _humidityTip;
-        private string _lightingTip;
+        private string? _tempTip;
+        private string? _humidityTip;
+        private string? _lightingTip;
         private Timer? weatherReadingTimer;
-        private List<Weather> weathers;
+        private List<Weather>? weathers;
+        private int currentWeatherIndex = 0;
 
         private Window _window;
         public ICommand GotoHomeViewCommand { get; }
@@ -37,6 +38,13 @@ namespace Automate.ViewModels
             _navigationService = navigationService;
         }
 
+        public Weather CurrentWeather
+        {
+            get
+            {
+                return weathers![currentWeatherIndex];
+            }
+        }
 
         public bool IsWindowOpen
         {
@@ -44,6 +52,7 @@ namespace Automate.ViewModels
             set
             {
                 GreenHouse.isWindowOpen = value;
+                GetTipsForWeather(CurrentWeather);
                 NotifyOnPropertyChanged(nameof(IsWindowOpen));
             }
         }
@@ -54,15 +63,18 @@ namespace Automate.ViewModels
             set
             {
                 GreenHouse.isHeaterActivated = value;
+                GetTipsForWeather(CurrentWeather);
                 NotifyOnPropertyChanged(nameof(IsHeaterActivated));
             }
         }
+
         public bool IsSprinklerActivated
         {
             get => GreenHouse.isSprinklerActivated;
             set
             {
                 GreenHouse.isSprinklerActivated = value;
+                GetTipsForWeather(CurrentWeather);
                 NotifyOnPropertyChanged(nameof(IsSprinklerActivated));
             }
         }
@@ -73,6 +85,7 @@ namespace Automate.ViewModels
             set
             {
                 GreenHouse.isFanActivated = value;
+                GetTipsForWeather(CurrentWeather);
                 NotifyOnPropertyChanged(nameof(IsFanActivated));
             }
 
@@ -84,13 +97,14 @@ namespace Automate.ViewModels
             set
             {
                 GreenHouse.isLightOpen = value;
+                GetTipsForWeather(CurrentWeather);
                 NotifyOnPropertyChanged(nameof(IsLightOpen));
             }
         }
 
         public string TempTip
         {
-            get => _tempTip;
+            get => _tempTip!;
             set
             {
                 _tempTip = value;
@@ -100,7 +114,7 @@ namespace Automate.ViewModels
 
         public string HumidityTip
         {
-            get => _humidityTip;
+            get => _humidityTip!;
             set
             {
                 _humidityTip = value;
@@ -110,7 +124,7 @@ namespace Automate.ViewModels
 
         public string LightingTip
         {
-            get => _lightingTip;
+            get => _lightingTip!;
             set
             {
                 _lightingTip = value;
@@ -123,35 +137,35 @@ namespace Automate.ViewModels
             weathers = WeatherConditionsService.GetWeathers();
         }
 
-        private int currentWeatherIndex = 0;
-
         public void StartWeatherReading()
         {
             const int delay = 0;
-            const int interval = 10;
+            const int interval = 10000;
             if (weatherReadingTimer == null)
             {
-                weatherReadingTimer = new Timer(GetTips, null, delay, interval);
+                weatherReadingTimer = new Timer(GetTipsOnTimer, null, delay, interval);
             }
             else
             {
                 weatherReadingTimer.Dispose();
                 weatherReadingTimer = null;
-                currentWeatherIndex = 0;
             }
         }
 
-        public void GetTips(object? state)
+        public void GetTipsOnTimer(object? state)
         {
-            if (currentWeatherIndex > weathers.Count - 1)
-            {
+            if (currentWeatherIndex > weathers!.Count - 1)
                 currentWeatherIndex = 0;
-            }
-            Weather currentWeather = weathers[currentWeatherIndex];
-            TempTip = WeatherTips.GetTempTips(currentWeather.Temperature, IsHeaterActivated, IsWindowOpen);
-            HumidityTip = WeatherTips.GetHumidityTips(currentWeather.Humidity, IsFanActivated, IsSprinklerActivated);
-            LightingTip = WeatherTips.GetLightingTips(currentWeather.Lighting, currentWeather.DateTime.Hour, IsLightOpen);
+
+            GetTipsForWeather(CurrentWeather);
             currentWeatherIndex++;
+        }
+
+        public void GetTipsForWeather(Weather weather)
+        {
+            TempTip = WeatherTips.GetTempTips(weather.Temperature, IsHeaterActivated, IsWindowOpen);
+            HumidityTip = WeatherTips.GetHumidityTips(weather.Humidity, IsFanActivated, IsSprinklerActivated);
+            LightingTip = WeatherTips.GetLightingTips(weather.Lighting, weather.DateTime.Hour, IsLightOpen);
         }
 
         public void GoToHomeView()
@@ -164,8 +178,6 @@ namespace Automate.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
     }
 }
 

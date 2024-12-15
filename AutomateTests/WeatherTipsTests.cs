@@ -79,7 +79,7 @@ namespace AutomateTests
         [Test]
         public void GetTempTips_TempOK_HeatingIsNotOn_WindowsAreOpen()
         {
-            const string EXPECTED_MESSAGE = "OK";
+            const string EXPECTED_MESSAGE = "CHAUFFAGE EN ORDRE";
 
             string message = WeatherTips.GetTempTips(TEMP_OK, false, true);
 
@@ -149,7 +149,7 @@ namespace AutomateTests
         [Test]
         public void GetHumidityTips_HumidityOK_VentilationIsOn_SprinklersAreNotOn()
         {
-            const string EXPECTED_MESSAGE = "OK";
+            const string EXPECTED_MESSAGE = "HUMIDITÉ EN ORDRE";
 
             string message = WeatherTips.GetHumidityTips(HUMIDITY_OK, true, false);
 
@@ -192,7 +192,7 @@ namespace AutomateTests
         [Test]
         public void GetLightingTips_LightingUnder_AtMidnight_LightsAreOff()
         {
-            const string EXPECTED_MESSAGE = "OK";
+            const string EXPECTED_MESSAGE = "ÉCLAIRAGE EN ORDRE";
             const int time = 23;
 
             string message = WeatherTips.GetLightingTips(LUX_UNDER_MIN, time, false);
@@ -203,7 +203,7 @@ namespace AutomateTests
         [Test]
         public void GetLightingTips_LightingOK_AtNoon()
         {
-            const string EXPECTED_MESSAGE = "OK";
+            const string EXPECTED_MESSAGE = "ÉCLAIRAGE EN ORDRE";
             const int time = 11;
 
             string message = WeatherTips.GetLightingTips(LUX_OK, time, false);

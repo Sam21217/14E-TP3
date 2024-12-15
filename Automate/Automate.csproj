@@ -11,12 +11,18 @@
     <None Remove="Resources\arroseur.png" />
     <None Remove="Resources\automate.jpg" />
     <None Remove="Resources\chauffage.png" />
+    <None Remove="Resources\fan.png" />
     <None Remove="Resources\fenetre.png" />
+    <None Remove="Resources\heat.png" />
+    <None Remove="Resources\lightbulb.png" />
     <None Remove="Resources\lumiere.png" />
+    <None Remove="Resources\sprinkler.png" />
     <None Remove="Resources\ventillation.png" />
+    <None Remove="Resources\window.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\fan.png" />
     <Resource Include="Resources\fenetre.png" />
   </ItemGroup>
 
@@ -33,8 +39,12 @@
     <Resource Include="Resources\arroseur.png" />
     <Resource Include="Resources\automate.jpg" />
     <Resource Include="Resources\chauffage.png" />
+    <Resource Include="Resources\heat.png" />
+    <Resource Include="Resources\lightbulb.png" />
     <Resource Include="Resources\lumiere.png" />
+    <Resource Include="Resources\sprinkler.png" />
     <Resource Include="Resources\ventillation.png" />
+    <Resource Include="Resources\window.png" />
   </ItemGroup>
 
 </Project>

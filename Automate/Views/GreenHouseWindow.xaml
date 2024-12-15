@@ -4,11 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Automate.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:Automate.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:GreenHouseViewModel}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:Automate.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:GreenHouseViewModel}"
     Width="800"
     Height="450"
     mc:Ignorable="d"
-    Title="SerreWindow">
+    Title="SerreWindow"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+    ui:WindowHelper.UseModernWindowStyle="True">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Style x:Key="SwitchStyle" TargetType="ToggleButton">
@@ -41,103 +45,88 @@
     </Window.Resources>
 
     <Grid>
-        <StackPanel
-            Margin="71,94,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Orientation="Vertical">
-            <ToggleButton
-                Margin="5"
-                IsChecked="{Binding IsWindowOpen}"
-                Style="{StaticResource SwitchStyle}" />
-            <ToggleButton
-                Margin="5"
-                IsChecked="{Binding IsHeaterActivated}"
-                Style="{StaticResource SwitchStyle}" />
-            <ToggleButton
-                Margin="5"
-                IsChecked="{Binding IsFanActivated}"
-                Style="{StaticResource SwitchStyle}" />
-            <ToggleButton
-                Margin="5"
-                IsChecked="{Binding IsSprinklerActivated}"
-                Style="{StaticResource SwitchStyle}" />
-            <ToggleButton
-                Margin="5"
-                IsChecked="{Binding IsLightOpen}"
-                Style="{StaticResource SwitchStyle}" />
-        </StackPanel>
-        <TextBlock
-            Width="56"
-            Height="17"
-            Margin="136,101,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            TextWrapping="Wrap">
-            <Run Language="fr-ca" Text="Fenêtres" />
-        </TextBlock>
-        <TextBlock
-            Width="70"
-            Height="17"
-            Margin="136,134,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            TextWrapping="Wrap">
-            <Run Language="fr-ca" Text="Chauffages" />
-        </TextBlock>
-        <TextBlock
-            Width="70"
-            Height="17"
-            Margin="136,166,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            TextWrapping="Wrap">
-            <Run Language="fr-ca" Text="Ventilateurs" />
-        </TextBlock>
-        <TextBlock
-            Width="56"
-            Height="17"
-            Margin="136,199,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            TextWrapping="Wrap">
-            <Run Language="fr-ca" Text="Arroseurs" />
-        </TextBlock>
-        <TextBlock
-            Width="56"
-            Height="17"
-            Margin="136,231,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            TextWrapping="Wrap">
-            <Run Language="fr-ca" Text="Lumières" />
-        </TextBlock>
-        <Button
-            Margin="10,10,0,0"
-            VerticalAlignment="Top"
-            Command="{Binding GotoHomeViewCommand}"
-            Content="Retour à l'accueil" />
-        <Rectangle HorizontalAlignment="Left" Height="195" Margin="206,77,0,0" Stroke="Black" VerticalAlignment="Top" Width="151"/>
-        <Image Source="../Resources/lumiere.png" HorizontalAlignment="Left" Height="31" Margin="215,232,0,0" VerticalAlignment="Top" Width="22" 
-       Visibility="{Binding IsLightOpen, Converter={StaticResource BooleanToVisibilityConverter}}" RenderTransformOrigin="1.076,1.1" />
-        <Image Source="../Resources/fenetre.png" HorizontalAlignment="Left" Height="48" Margin="206,77,0,0" VerticalAlignment="Top" Width="40" 
-       Visibility="{Binding IsWindowOpen, Converter={StaticResource BooleanToVisibilityConverter}}" />
-        <Image Source="../Resources/ventillation.png" HorizontalAlignment="Left" Height="22" Margin="209,166,0,0" VerticalAlignment="Top" Width="40" 
-       Visibility="{Binding IsFanActivated, Converter={StaticResource BooleanToVisibilityConverter}}" />
-        <Image Source="../Resources/arroseur.png" HorizontalAlignment="Left" Height="33" Margin="214,193,0,0" VerticalAlignment="Top" Width="30" 
-       Visibility="{Binding IsSprinklerActivated, Converter={StaticResource BooleanToVisibilityConverter}}" />
-        <Image Source="../Resources/chauffage.png" HorizontalAlignment="Left" Height="46" Margin="212,113,0,0" VerticalAlignment="Top" Width="33" 
-       Visibility="{Binding IsHeaterActivated, Converter={StaticResource BooleanToVisibilityConverter}}" />
-        <Rectangle Panel.ZIndex="-1" HorizontalAlignment="Left" Height="219" Margin="71,68,0,0" Stroke="Black" VerticalAlignment="Top" Width="298" >
-            <Rectangle.Fill>
-                <SolidColorBrush Color="gray" />
-            </Rectangle.Fill>
-        </Rectangle>
-        <Rectangle Panel.ZIndex="-1" HorizontalAlignment="Left" Height="218" Margin="400,68,0,0" Stroke="Black" VerticalAlignment="Top" Width="316" >
-            <Rectangle.Fill>
-                <SolidColorBrush Color="gray" />
-            </Rectangle.Fill>
-        </Rectangle>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle Stroke="Black" Panel.ZIndex="-1" Fill="Gray" Grid.Row="0" Grid.ColumnSpan="2"/>
+        <Button Command="{Binding GotoHomeViewCommand}" Content="Retour à l'accueil" Margin="78,0,0,0" />
+        <Grid Background="Gray" Grid.Column="0" Margin="70,15,10,7" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <ToggleButton Margin="5,0,5,0" IsChecked="{Binding IsWindowOpen}" Style="{StaticResource SwitchStyle}" Grid.Column="0" VerticalAlignment="Center"/>
+
+            <ToggleButton Margin="5,0,5,0" IsChecked="{Binding IsHeaterActivated}" Style="{StaticResource SwitchStyle}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+
+            <ToggleButton Margin="5,0,5,0" IsChecked="{Binding IsFanActivated}" Style="{StaticResource SwitchStyle}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+
+            <ToggleButton Margin="5,0,5,0" IsChecked="{Binding IsSprinklerActivated}" Style="{StaticResource SwitchStyle}" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+
+            <ToggleButton Margin="5,0,5,0" IsChecked="{Binding IsLightOpen}" Style="{StaticResource SwitchStyle}" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+
+
+            <TextBlock Width="70" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Fenêtres" Grid.Column="1"/>
+
+            <TextBlock Width="70" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Chauffage" Grid.Row="1" Grid.Column="1"/>
+
+            <TextBlock Width="70" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Ventilation" Grid.Row="2" Grid.Column="1"/>
+
+            <TextBlock Width="70" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Arroseurs" Grid.Row="3" Grid.Column="1"/>
+
+            <TextBlock Width="70" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Lumières" Grid.Row="4" Grid.Column="1" />
+
+
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch" Grid.Column="2" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+
+            <Image Source="../Resources/window.png" HorizontalAlignment="Center"  Width="40" Grid.Row="0" Grid.Column="2" VerticalAlignment="Stretch"
+                    Visibility="{Binding IsWindowOpen, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+            <Image Source="../Resources/heat.png" HorizontalAlignment="Center"  Width="40" Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch"
+                    Visibility="{Binding IsHeaterActivated, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+            <Image Source="../Resources/fan.png" HorizontalAlignment="center"  Width="40" Grid.Row="2" Grid.Column="2" VerticalAlignment="Stretch"
+                    Visibility="{Binding IsFanActivated, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+            <Image Source="../Resources/sprinkler.png" HorizontalAlignment="Center" Width="40" Grid.Row="3" Grid.Column="2" VerticalAlignment="Stretch"
+                    Visibility="{Binding IsSprinklerActivated, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+            <Image Source="../Resources/lightbulb.png" HorizontalAlignment="Center" Width="40" Grid.Row="4" Grid.Column="2" VerticalAlignment="Stretch"
+                    Visibility="{Binding IsLightOpen, Converter={StaticResource BooleanToVisibilityConverter}}" RenderTransformOrigin="1.076,1.1" />
+
+        </Grid>
+        <Grid Background="Gray" Grid.Row="1" Grid.Column="1" Margin="10,15,70,7">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="{Binding TempTip}" Height="50" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Padding="10" Grid.Row="0" FontSize="14"/>
+
+            <TextBlock Text="{Binding HumidityTip}" Height="50" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Padding="10" Grid.Row="1" FontSize="14"/>
+
+            <TextBlock Text="{Binding LightingTip}" Height="50" HorizontalAlignment="Left" TextWrapping="Wrap" Padding="10" VerticalAlignment="Center" Grid.Row="2" FontSize="14"/>
+
+            <Button Content="Lancer la lecture des températures" HorizontalAlignment="Stretch" Command="{Binding StartWeatherReadingCommand}" Grid.Row="3" VerticalAlignment="Stretch" Background="LimeGreen"/>
+        </Grid>
     </Grid>
 
 </Window>
