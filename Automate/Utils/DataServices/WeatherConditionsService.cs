@@ -6,11 +6,11 @@ using Automate.Models;
 
 namespace Automate.Utils.DataServices
 {
-    public class WeatherConditionsService
+    public static class WeatherConditionsService
     {
         private const string DATA_FILE_PATH = "TempData.csv";
 
-        public List<Weather> GetWeathers()
+        public static List<Weather> GetWeathers()
         {
             List<Weather> Conditions = new List<Weather>();
             StreamReader file = new StreamReader(DATA_FILE_PATH);
@@ -24,7 +24,7 @@ namespace Automate.Utils.DataServices
             return Conditions;
         }
 
-        private Weather CreateOutsideConditions(string[] lineContent)
+        private static Weather CreateOutsideConditions(string[] lineContent)
         {
             DateTime dateTime = Convert.ToDateTime(lineContent[0]);
             int temp = int.Parse(lineContent[1]);
