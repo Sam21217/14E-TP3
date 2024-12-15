@@ -8,7 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\arroseur.png" />
     <None Remove="Resources\automate.jpg" />
+    <None Remove="Resources\chauffage.png" />
+    <None Remove="Resources\fenetre.png" />
+    <None Remove="Resources\lumiere.png" />
+    <None Remove="Resources\ventillation.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\fenetre.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,7 +30,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\arroseur.png" />
     <Resource Include="Resources\automate.jpg" />
+    <Resource Include="Resources\chauffage.png" />
+    <Resource Include="Resources\lumiere.png" />
+    <Resource Include="Resources\ventillation.png" />
   </ItemGroup>
 
 </Project>

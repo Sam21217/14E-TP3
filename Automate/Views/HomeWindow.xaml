@@ -19,7 +19,7 @@
         <StackPanel Background="Gray" VerticalAlignment="Top" Height="276" Margin="200,99,0,0" HorizontalAlignment="Left" Width="200" Grid.Column="1">
             <TextBlock TextWrapping="Wrap" Text="Outils" FontSize="24" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"/>
             <Button Content="Calendrier" Height="31" VerticalAlignment="Top" Width="156" Command="{Binding GoToCalendarCommand}" HorizontalAlignment="Center" Margin="0,20,0,30" BorderThickness="1" BorderBrush="Black" Cursor="Hand"/>
-            <Button Content="Serre" Height="31" VerticalAlignment="Top" Width="156" Command="{Binding GoToSerreCommand}" Margin="0,20,0,30" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="Black" Cursor="Hand"/>
+            <Button Content="Serre" Height="31" VerticalAlignment="Top" Width="156" Command="{Binding GoToGreenHouseCommand}" Margin="0,20,0,30" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="Black" Cursor="Hand"/>
             <Button Content="Inventaire" Height="31" Width="156" Margin="0,20,0,30" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="Black" IsEnabled="False"/>
         </StackPanel>
     </Grid>

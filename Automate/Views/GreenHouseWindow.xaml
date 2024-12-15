@@ -4,12 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Automate.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:Automate.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:GreenHouseViewModel}"
     Width="800"
     Height="450"
     mc:Ignorable="d"
     Title="SerreWindow">
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Style x:Key="SwitchStyle" TargetType="ToggleButton">
             <Setter Property="Template">
                 <Setter.Value>
@@ -17,7 +18,7 @@
                         <Grid Width="45" Height="22">
                             <Border
                                 x:Name="Background"
-                                Background="Gray"
+                                Background="LightGray"
                                 CornerRadius="15" />
                             <Ellipse
                                 x:Name="Switch"
@@ -25,11 +26,11 @@
                                 Height="15"
                                 Margin="2"
                                 HorizontalAlignment="Left"
-                                Fill="White" />
+                                Fill="Black" />
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="Background" Property="Background" Value="blue" />
+                                <Setter TargetName="Background" Property="Background" Value="limegreen" />
                                 <Setter TargetName="Switch" Property="HorizontalAlignment" Value="Right" />
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -41,20 +42,35 @@
 
     <Grid>
         <StackPanel
-            Margin="10,94,0,0"
+            Margin="71,94,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Orientation="Vertical">
-            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" IsChecked="{Binding IsWindowOpen}"/>
-            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" IsChecked="{Binding IsHeaterActivated}"/>
-            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" IsChecked="{Binding IsFanActivated}" />
-            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" IsChecked="{Binding IsSprinklerActivated}"/>
-            <ToggleButton Margin="5" Style="{StaticResource SwitchStyle}" IsChecked="{Binding IsLightOpen}"/>
+            <ToggleButton
+                Margin="5"
+                IsChecked="{Binding IsWindowOpen}"
+                Style="{StaticResource SwitchStyle}" />
+            <ToggleButton
+                Margin="5"
+                IsChecked="{Binding IsHeaterActivated}"
+                Style="{StaticResource SwitchStyle}" />
+            <ToggleButton
+                Margin="5"
+                IsChecked="{Binding IsFanActivated}"
+                Style="{StaticResource SwitchStyle}" />
+            <ToggleButton
+                Margin="5"
+                IsChecked="{Binding IsSprinklerActivated}"
+                Style="{StaticResource SwitchStyle}" />
+            <ToggleButton
+                Margin="5"
+                IsChecked="{Binding IsLightOpen}"
+                Style="{StaticResource SwitchStyle}" />
         </StackPanel>
         <TextBlock
             Width="56"
             Height="17"
-            Margin="75,101,0,0"
+            Margin="136,101,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             TextWrapping="Wrap">
@@ -63,7 +79,7 @@
         <TextBlock
             Width="70"
             Height="17"
-            Margin="75,134,0,0"
+            Margin="136,134,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             TextWrapping="Wrap">
@@ -72,7 +88,7 @@
         <TextBlock
             Width="70"
             Height="17"
-            Margin="75,166,0,0"
+            Margin="136,166,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             TextWrapping="Wrap">
@@ -81,7 +97,7 @@
         <TextBlock
             Width="56"
             Height="17"
-            Margin="75,199,0,0"
+            Margin="136,199,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             TextWrapping="Wrap">
@@ -90,19 +106,38 @@
         <TextBlock
             Width="56"
             Height="17"
-            Margin="75,231,0,0"
+            Margin="136,231,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             TextWrapping="Wrap">
             <Run Language="fr-ca" Text="Lumières" />
         </TextBlock>
-        <Image
-            Source="/Resources/greenHouse.png" 
-            Width="511"
-            Height="301"
-            Margin="231,61,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"/>
-        <Button Content="Retour à l'accueil" Margin="10,10,0,0" VerticalAlignment="Top" Command="{Binding GotoHomeViewCommand}"/>
+        <Button
+            Margin="10,10,0,0"
+            VerticalAlignment="Top"
+            Command="{Binding GotoHomeViewCommand}"
+            Content="Retour à l'accueil" />
+        <Rectangle HorizontalAlignment="Left" Height="195" Margin="206,77,0,0" Stroke="Black" VerticalAlignment="Top" Width="151"/>
+        <Image Source="../Resources/lumiere.png" HorizontalAlignment="Left" Height="31" Margin="215,232,0,0" VerticalAlignment="Top" Width="22" 
+       Visibility="{Binding IsLightOpen, Converter={StaticResource BooleanToVisibilityConverter}}" RenderTransformOrigin="1.076,1.1" />
+        <Image Source="../Resources/fenetre.png" HorizontalAlignment="Left" Height="48" Margin="206,77,0,0" VerticalAlignment="Top" Width="40" 
+       Visibility="{Binding IsWindowOpen, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <Image Source="../Resources/ventillation.png" HorizontalAlignment="Left" Height="22" Margin="209,166,0,0" VerticalAlignment="Top" Width="40" 
+       Visibility="{Binding IsFanActivated, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <Image Source="../Resources/arroseur.png" HorizontalAlignment="Left" Height="33" Margin="214,193,0,0" VerticalAlignment="Top" Width="30" 
+       Visibility="{Binding IsSprinklerActivated, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <Image Source="../Resources/chauffage.png" HorizontalAlignment="Left" Height="46" Margin="212,113,0,0" VerticalAlignment="Top" Width="33" 
+       Visibility="{Binding IsHeaterActivated, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <Rectangle Panel.ZIndex="-1" HorizontalAlignment="Left" Height="219" Margin="71,68,0,0" Stroke="Black" VerticalAlignment="Top" Width="298" >
+            <Rectangle.Fill>
+                <SolidColorBrush Color="gray" />
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Panel.ZIndex="-1" HorizontalAlignment="Left" Height="218" Margin="400,68,0,0" Stroke="Black" VerticalAlignment="Top" Width="316" >
+            <Rectangle.Fill>
+                <SolidColorBrush Color="gray" />
+            </Rectangle.Fill>
+        </Rectangle>
     </Grid>
+
 </Window>
