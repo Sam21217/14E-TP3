@@ -10,15 +10,14 @@ namespace Automate.ViewModels
     {
         private readonly NavigationUtils _navigationService;
         public ICommand GoToCalendarCommand { get; }
-        public ICommand GoToSerreCommand { get; }
-
+        public ICommand GoToGreenHouseCommand { get; }
         public ICommand DisconnectUserCommand { get; }
 
         private Window _window;
         public HomeViewModel(Window openedWindow, NavigationUtils navigationService)
         {
             GoToCalendarCommand = new RelayCommand(GotoCalendarView);
-            GoToSerreCommand = new RelayCommand(GotoSerreView);
+            GoToGreenHouseCommand = new RelayCommand(GotoGreenHouseView);
             DisconnectUserCommand = new RelayCommand(DisconnectUser);
             _navigationService = navigationService;
             _window = openedWindow;
@@ -29,7 +28,7 @@ namespace Automate.ViewModels
             _navigationService.OpenNewView<CalendarWindow>();
             _navigationService.CloseCurrentView(_window);
         }
-        public void GotoSerreView()
+        public void GotoGreenHouseView()
         {
             _navigationService.OpenNewView<GreenHouseWindow>();
             _navigationService.CloseCurrentView(_window);

@@ -36,7 +36,7 @@
                 if (!heatingIsOn && windowsAreOpen)
                     return "ACTIVER CHAUFFAGE ET FERMER FENÊTRES CAR TEMPÉRATURE TROP BASSE";
             }
-            return "OK";
+            return "CHAUFFAGE EN ORDRE";
         }
 
         public static string GetHumidityTips(int humidity, bool ventilationIsOn, bool sprinklersAreOn)
@@ -63,7 +63,7 @@
                 if (ventilationIsOn && !sprinklersAreOn)
                     return "DÉSACTIVER VENTILATION ET ACTIVER ARROSEURS CAR HUMIDITÉ TROP BASSE";
             }
-            return "OK";
+            return "HUMIDITÉ EN ORDRE";
         }
 
         public static string GetLightingTips(int lighting, int time, bool lightsAreOn)
@@ -77,7 +77,7 @@
             if (lighting < MIN_LUX && !lightsAreOn && !IsNight(time))
                 return "ALLUMER LUMIÈRES CAR LUMINOSITÉ TROP BASSE";
 
-            return "OK"; 
+            return "ÉCLAIRAGE EN ORDRE"; 
         }
 
         static private bool IsNight(int time)

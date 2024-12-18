@@ -25,7 +25,7 @@ namespace Automate.Views
         public GreenHouseWindow()
         {
             InitializeComponent();
-            DataContext = new GreenHouseViewModel(this);
+            DataContext = new GreenHouseViewModel(this, new NavigationUtils());
         }
     }
 }
